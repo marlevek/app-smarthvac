@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SmartHVAC Assist – Tela do Assistente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{% static 'images/favicon-smarthvac.png' %}">
+
+
+    <!-- Bootstrap 5 via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="{% static 'assistente/css/assistente.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <div class="app-card">
+            <div class="app-header">
+                <div class="app-header-icon">
+                    <img src="{% static 'images/logo_smarthvac.png' %}" alt="logo SmartHVAC Assist">
+                </div>
+                <div>
+                    <div class="small fw-semibold">SmartHVAC Assist</div>
+                    <div class="small text-secondary">Assistente de diagnóstico em HVAC</div>
+                </div>
+                <div class="ms-auto">
+                    <span class="badge-hvac">MVP • Versão demonstração</span>
+                </div>
+            </div>
+
+                    <div class="msg msg-assistant">
+                        <div class="small text-secondary mb-1">SmartHVAC Assist</div>
+                        <div class="bubble">
+                            Olá! Me diga o contexto da máquina e os sintomas que você está vendo em campo
+                            para eu ajudar no diagnóstico.
+                        </div>
+                    </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="app-body">
+                    <div class="mb-2">
+<label class="form-label">Tipo de equipamento</label>
+<select class="form-select form-select-sm" name="tipo_equipamento">
+<option value="split_hi_wall" {% if tipo_equipamento == "split_hi_wall" %}selected{% endif %}>
+Split Hi-Wall</option>
+<option value="piso_teto" {% if tipo_equipamento == "piso_teto" %}selected{% endif %}>Piso
+Teto</option>
+<option value="cassete" {% if tipo_equipamento == "cassete" %}selected{% endif %}>Cassete
+</option>
+<option value="freezer_farmaceutico" {% if tipo_equipamento == "freezer_farmaceutico"%}selected{% endif %}>Freezer farmacêutico</option>
+<option value="camara_fria" {% if tipo_equipamento == "camara_fria" %}selected{% endif %}>
+Câmara fria</option>
+</select>
+</div>
+
+                    <div class="mb-2">
+                    <label class="form-label">Marca do equipamento</label>
+                    <input type="text"
+           class="form-control form-control-sm"
+           name="marca_equipamento"
+           placeholder="Ex.: LG, Samsung, Elgin, Carrier..."
+           value="{{ marca_equipamento }}">
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Fluido refrigerante</label>
+                     <select class="form-select form-select-sm" name="fluido">
+        <option value="R410A" {% if fluido == "R410A" %}selected{% endif %}>R410A</option>
+        <option value="R32" {% if fluido == "R32" %}selected{% endif %}>R32</option>
+        <option value="R22" {% if fluido == "R22" %}selected{% endif %}>R22</option>
+        <option value="R134a" {% if fluido == "R134a" %}selected{% endif %}>R134a</option>
+        <option value="outro" {% if fluido == "outro" %}selected{% endif %}>Outro / não informado</option>
+    </select>
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Sintomas observados em campo</label>
+                    <textarea class="form-control form-control-sm"
+              name="sintomas"
+              rows="3"
+              placeholder="Ex.: evaporadora pingando água, freezer não chega em -28°C, pressão de sucção muito baixa, etc.">{{ sintomas }}</textarea>
+                </div>
+
+                <div class="chat-area">
+               {% if resposta_exemplo %}
+<div class="msg msg-user">
+    <div class="msg-author">Você</div>
+    <div class="bubble bubble-user">
+        {{ sintomas|default:"(Nenhum sintoma informado)" }}
+    </div>
+</div>
+
+<div class="msg msg-assistant">
+    <div class="msg-author">SmartHVAC Assist</div>
+    <div class="bubble bubble-assistant">
+        {{ resposta_exemplo|linebreaksbr }}
+    </div>
+</div>
+{% endif %}
+
+                </div>
+        </div>
+
+        <div class="send-area">
+            <button type="submit" class="btn btn-send w-100">
+                Gerar diagnóstico de demonstração
+            </button>
+            <p class="small-note mt-2 mb-0">
+                Esta é apenas uma simulação visual do fluxo do app. Em breve, esta tela será conectada
+                à IA e à base de conhecimento em HVAC.
+            </p>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
