@@ -111,6 +111,7 @@ body {
     /* Alinha os itens à esquerda */
     gap: 10px;
     /* Espaçamento entre as mensagens */
+    padding: 0.25rem;
 }
 
 .msg {
@@ -119,7 +120,7 @@ body {
     align-items: flex-start;
     /* Alinha a mensagem à esquerda */
     padding: 10px;
-    max-width: 80%;
+    max-width: 100%;
     /* Limita a largura da mensagem */
 }
 
@@ -137,13 +138,20 @@ body {
 }
 
 .msg-assistant .bubble {
-    background-color: #f1f1f1;
-    padding: 12px;
-    border-radius: 8px;
-    max-width: 100%;
-    font-size: 1rem;
-    color: #333;
-    line-height: 1.5;
+    background-color: #f9fafb;
+    color: #111827;
+    border-radius: 1rem 1rem 1rem 0.25rem;
+
+    /* 🔽 AJUSTES IMPORTANTES */
+    max-width: 90%;
+    width: fit-content;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding: 1rem 1.4rem;
+}
+
+.msg-assistant {
+    align-self: flex-start;
 }
 
 

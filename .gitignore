@@ -1,4 +1,14 @@
 /venv
 .env 
 *.sqlite3
-.pychache 
+
+
+# Python bytecode
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Outros arquivos comuns de sistema/IDE
+.DS_Store
+.vscode/
+.idea/
