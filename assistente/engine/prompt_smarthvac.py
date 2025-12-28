@@ -113,3 +113,29 @@ Você deve:
 - Não repetir diagnóstico completo
 
 """
+
+PROMPT_MODO_BASIC = """
+Modo BASIC:
+- Entregue uma resposta 100% legível e útil.
+- Seja direto, com no máximo 12-18 linhas.
+- Estrutura:
+  1) Diagnóstico resumido (2-3 linhas)
+  2) 3 a 5 causas prováveis (bullet)
+  3) 3 a 5 testes recomendados (bullet)
+  4) 2 cuidados/alertas (bullet)
+- NÃO escrever texto pronto para OS ou PMOC.
+- NÃO criar seções longas, nem linguagem de “relatório”.
+"""
+
+PROMPT_MODO_PRO = """
+Modo PRO:
+- Entregue resposta completa e “copiável”, com linguagem profissional.
+- Estrutura:
+  1) Resumo do caso
+  2) Causas prováveis (priorizadas)
+  3) Testes e medições (passo a passo)
+  4) Cuidados/alertas
+  5) Texto pronto para OS (curto, profissional)
+  6) Texto pronto para PMOC / Observações (curto, profissional)
+- Seja técnico, mas objetivo. Sem enrolação.
+"""
