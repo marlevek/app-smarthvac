@@ -7,6 +7,7 @@ from .engine.prompt_smarthvac import SMART_HVAC_SYSTEM_PROMPT
 from dotenv import load_dotenv
 from assistente.engine.memoria import obter_ou_criar_conversa, carregar_historico, salvar_interacao
 from assistente.models import ChatConversa
+from assistente.engine.base_loader import carregar_base_hvac
 
 
 
@@ -70,6 +71,13 @@ def tela_assistente(request):
                 condicoes="Não informado",
                 pedido=pedido_ia
             )
+            
+            # Carrega contexto da base HVAC
+            base_contexto = carregar_base_hvac(
+                tipo_equipamento = tipo_equipamento,
+                fluido = fluido,
+                fabricante = marca_equipamento,
+            )    
 
             try:
                 conversa = obter_ou_criar_conversa(session_key)
@@ -78,6 +86,13 @@ def tela_assistente(request):
                 messages = [
                     {"role": "system", "content": SMART_HVAC_SYSTEM_PROMPT}
                 ]
+                
+                if base_contexto:
+                    messages.append({
+                        'role': 'system',
+                        'content': f'BASE TÉCNICA INTERNA:\n{base_contexto}'
+                    })
+                    
                 messages.extend(historico)
                 messages.append({"role": "user", "content": conteudo})
 
